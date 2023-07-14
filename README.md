@@ -73,7 +73,7 @@ contract gasChallenge {
 
 I headed over to `test/test_gasChallenge.js` and wrote a unit test under the describe block to check that after running the gas optimized function, the sum of array is 0. 
 
-```
+``` Javascript
 describe("Check Sum Of Array", () => {
     it("Should return 0", async () => {
       await gas_contract.optimizedFunction(); // Run the optimizedFunction to set the array elements to 0
