@@ -33,7 +33,20 @@ Once you have cloned the repository and installed the necessary dependencies, op
 
 ## Test Smart Contract
 
-Next, head over to `test/test_gasChallenge.js`. You are required to write a unit test under the describe block to check that after running the gas optimized function, the sum of array is 0. Once you have implemented the test block, proceed the run the following command to test your smart contract.
+I headed over to `test/test_gasChallenge.js` and wrote a unit test under the describe block to check that after running the gas optimized function, the sum of array is 0. 
+
+```
+describe("Check Sum Of Array", () => {
+    it("Should return 0", async () => {
+      await gas_contract.optimizedFunction();
+      const sum = await gas_contract.getSumOfArray();
+      expect(sum).to.equal(0);
+    });
+  }); 
+```
+
+
+I proceeded to run the following command to test the smart contract.
 
 ```bash
 npx hardhat test
@@ -41,14 +54,13 @@ npx hardhat test
 
 This command will test the smart contract and compute the estimated gas cost. This is computed using the [hardhat-gas-reporter](https://www.npmjs.com/package/hardhat-gas-reporter) library.
 
-The library has been configured to output the estimated gas costs to a new `gas-report.txt` file on your root directory. You can then view the estimated gas consumption for each of the smart contract functions in this file. The `optimizedFunction()` should output a lower gas consumption to the `notOptimizedFunction()` as shown below.
+The library output the estimated gas costs to a new `gas-report.txt` file on my root directory. You can then view the estimated gas consumption for each of the smart contract functions in this file. The `optimizedFunction()` should output a lower gas consumption to the `notOptimizedFunction()` as shown below.
 
-![Screenshot 2023-07-11 at 2 34 24 PM](https://github.com/clement-stackup/gas_challenge/assets/120361535/99e33517-5974-40a1-aa87-279051e58e42)
+The output shows that all tests passed successfully and no errors were encountered during testing:
+![Gas Report Screenshot](<assets/Gas Report Screenshot.png>)
 
-This command will also check if the sum of the array returns 0. You can refer below to view the terminal console when all tests have passed!
-
-![image](https://github.com/clement-stackup/gas_challenge/assets/120361535/760df9a2-c9f5-4c0f-af50-7a88093bdbda)
-
+This command also checked if the sum of the array returned 0. You can refer below to view the terminal console, all tests have passed!
+![Console screenshot](<assets/console screenshot.png>)
 ## Bounty Submission
 
 Upload all your working files to your GitHub Repository and submit your GitHub Repository URL to the StackUp Gas Optimization Challenge Bounty Page to successfully complete this challenge!
