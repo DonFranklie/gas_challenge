@@ -20,9 +20,10 @@ describe("Deploy Gas Challenge Contract", () => {
 
   describe("Check Sum Of Array", () => {
     it("Should return 0", async () => {
-      await gas_contract.optimizedFunction();
-      const sum = await gas_contract.getSumOfArray();
-      expect(sum).to.equal(0);
+      await gas_contract.optimizedFunction(); // Runs the optimizedFunction to set the array elements to 0
+      const sum = await gas_contract.getSumOfArray(); // Gets the sum of the array after running the optimizedFunction
+      expect(sum).to.equal(0); // Asserts that the sum is equal to 0
     });
-  });  
+});
+  
 });

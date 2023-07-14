@@ -44,15 +44,15 @@ contract gasChallenge {
     function getSumOfArray() public view returns (uint256) {
         uint sum = 0; // Initialize the sum variable
         for (uint i = 0; i < numbers.length; i++) {
-            sum += numbers[i]; // Add each element of the array to the sum
+            sum += numbers[i]; // Adds each element of the array to the sum
         }
-        return sum; // Return the final sum
+        return sum; // Returns the final sum
     }
     
     // Function that sets each element of the array to 0 (not optimized)
     function notOptimizedFunction() public {
         for (uint i = 0; i < numbers.length; i++) {
-            numbers[i] = 0; // Set each element to 0
+            numbers[i] = 0; // Sets each element to 0
         }
     }
     
@@ -60,7 +60,7 @@ contract gasChallenge {
     function optimizedFunction() public {
         unchecked { // Using unchecked block to skip overflow checks
             for (uint i = 0; i < numbers.length; i++) {
-                numbers[i] = 0; // Set each element to 0
+                numbers[i] = 0; // Sets each element to 0
             }
         }
     }
@@ -76,9 +76,9 @@ I headed over to `test/test_gasChallenge.js` and wrote a unit test under the des
 ``` Javascript
 describe("Check Sum Of Array", () => {
     it("Should return 0", async () => {
-      await gas_contract.optimizedFunction(); // Run the optimizedFunction to set the array elements to 0
-      const sum = await gas_contract.getSumOfArray(); // Get the sum of the array after running the optimizedFunction
-      expect(sum).to.equal(0); // Assert that the sum is equal to 0
+      await gas_contract.optimizedFunction(); // Runs the optimizedFunction to set the array elements to 0
+      const sum = await gas_contract.getSumOfArray(); // Gets the sum of the array after running the optimizedFunction
+      expect(sum).to.equal(0); // Asserts that the sum is equal to 0
     });
 });
 
