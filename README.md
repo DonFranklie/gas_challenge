@@ -10,15 +10,23 @@ This bounty challenges you to optimize a smart contract by applying the various 
 
 ## Overview of Gas Optimization Techniques
 
-To successfully complete this bounty, you will need to apply the following gas optimization techniques:
+To successfully complete this bounty, I applied the following gas optimization techniques:
 
-1. **Fixed Size over Dynamic Arrays**: Using fixed-size arrays instead of dynamic arrays can reduce gas consumption because Solidity has to perform less work to manage the memory allocation of arrays in the smart contract
+1. **Fixed Size over Dynamic Arrays**: Using fixed-size arrays instead of dynamic arrays to reduce gas consumption because Solidity has to perform less work to manage the memory allocation of arrays in the smart contract.
+```solidity
+    uint[10] numbers = [1,2,3,4,5,6,7,8,9,10]; // Using fixed-size array
+```
 
-2. **Caching State Variable**: Caching frequently accessed state variable can reduce gas consumption by reducing the number of storage reads required
+2. **Implemented Uncheck Block**: Using the `unchecked` block can reduce gas consumption by skipping certain checks such as integer overflows.
+```solidity
+    unchecked { // Using unchecked block to skip overflow checks
+            for (uint i = 0; i < numbers.length; i++) {
+                numbers[i] = 0; // Sets each element to 0
+            }
+        }
+```
 
-3. **Implement Uncheck Block**: Using the `unchecked` block can reduce gas consumption by skipping certain checks such as integer overflows
-
-4. **For Loop Increment Syntax**: Using a different for loop increment syntax can help reduce gas consumption
+3. **For Loop Increment Syntax**: Used a different for loop increment syntax can help reduce gas consumption.
 
 ## Getting Started
 
