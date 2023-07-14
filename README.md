@@ -30,6 +30,44 @@ cd gas_challenge && npm install
 ```
 
 Once you have cloned the repository and installed the necessary dependencies, open the `contracts/gasChallenge.sol` file to view the smart contract and apply the following gas optimization techniques above.
+This is how my optimized code looks like:
+
+**Optimized Code:**
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract gasChallenge {
+    uint[10] numbers = [1,2,3,4,5,6,7,8,9,10]; // Using fixed-size array
+    
+    // Function to calculate the sum of the array
+    function getSumOfArray() public view returns (uint256) {
+        uint sum = 0; // Initialize the sum variable
+        for (uint i = 0; i < numbers.length; i++) {
+            sum += numbers[i]; // Add each element of the array to the sum
+        }
+        return sum; // Return the final sum
+    }
+    
+    // Function that sets each element of the array to 0 (not optimized)
+    function notOptimizedFunction() public {
+        for (uint i = 0; i < numbers.length; i++) {
+            numbers[i] = 0; // Set each element to 0
+        }
+    }
+    
+    // Function that sets each element of the array to 0 (optimized)
+    function optimizedFunction() public {
+        unchecked { // Using unchecked block to skip overflow checks
+            for (uint i = 0; i < numbers.length; i++) {
+                numbers[i] = 0; // Set each element to 0
+            }
+        }
+    }
+}
+
+```
+
 
 ## Test Smart Contract
 
@@ -38,11 +76,12 @@ I headed over to `test/test_gasChallenge.js` and wrote a unit test under the des
 ```
 describe("Check Sum Of Array", () => {
     it("Should return 0", async () => {
-      await gas_contract.optimizedFunction();
-      const sum = await gas_contract.getSumOfArray();
-      expect(sum).to.equal(0);
+      await gas_contract.optimizedFunction(); // Run the optimizedFunction to set the array elements to 0
+      const sum = await gas_contract.getSumOfArray(); // Get the sum of the array after running the optimizedFunction
+      expect(sum).to.equal(0); // Assert that the sum is equal to 0
     });
-  }); 
+});
+
 ```
 
 
@@ -60,7 +99,9 @@ The output shows that all tests passed successfully and no errors were encounter
 ![Gas Report Screenshot](<assets/Gas Report Screenshot.png>)
 
 This command also checked if the sum of the array returned 0. You can refer below to view the terminal console, all tests have passed!
+
 ![Console screenshot](<assets/console screenshot.png>)
+
 ## Bounty Submission
 
 Upload all your working files to your GitHub Repository and submit your GitHub Repository URL to the StackUp Gas Optimization Challenge Bounty Page to successfully complete this challenge!
